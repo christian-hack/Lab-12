@@ -1,4 +1,6 @@
 import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.Graphics2D;
 import java.awt.GridLayout;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
@@ -66,7 +68,7 @@ public class DataEntryFrame extends JFrame
 	 */
 	private JLabel firstNameInfo = new JLabel("First Name:");
 	private JTextField firstName = new JTextField(15);
-	private JLabel midddleInitialInfo = new JLabel("Middle Initial:");
+	private JLabel middleInitialInfo = new JLabel("Middle Initial:");
 	private JTextField middleInitial = new JTextField(1);
 	private JLabel lastNameInfo = new JLabel("Last Name:");
 	private JTextField lastName = new JTextField(15);
@@ -135,22 +137,39 @@ public class DataEntryFrame extends JFrame
 
 		// TODO: add in all form-fillable components:
 		add(firstName);
+		add(firstNameInfo);
 		add(middleInitial);
+		add(middleInitialInfo);
 		add(lastName);
+		add(lastNameInfo);
 		add(displayName);
+		add(displayNameInfo);
 		add(SSN);
+		add(SSNInfo);
 		add(phone);
+		add(phoneInfo);
 		add(email);
+		add(emailInfo);
 		add(address);
+		add(addressInfo);
 		add(spanel);
-		JPanel formFill = new JPanel(new BorderLayout());
+		
+		JPanel formFill = new JPanel(new GridLayout(8, 1));
+		formFill.add(firstNameInfo);
 		formFill.add(firstName);
+		formFill.add(middleInitialInfo);
 		formFill.add(middleInitial);
+		formFill.add(lastNameInfo);
 		formFill.add(lastName);
+		formFill.add(displayNameInfo);
 		formFill.add(displayName);
+		formFill.add(SSNInfo);
 		formFill.add(SSN);
+		formFill.add(phoneInfo);
 		formFill.add(phone);
+		formFill.add(emailInfo);
 		formFill.add(email);
+		formFill.add(addressInfo);
 		formFill.add(address);
 		formFill.add(spanel);
 		this.add(formFill);
@@ -165,6 +184,13 @@ public class DataEntryFrame extends JFrame
 			public void mouseDragged(MouseEvent e)
 			{
 				// TODO: add a point to the panel on drag and repaint.
+				/**
+				Point p = new Point(e.getPoint());
+				SignaturePanel sp = new SignaturePanel();
+				sp.addPoint(p);
+				sp.paint(getGraphics());
+				*/
+				
 			}
 		});
 		this.add(signatureInfo);
