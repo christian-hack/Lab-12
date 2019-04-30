@@ -134,8 +134,25 @@ public class DataEntryFrame extends JFrame
 		this.add(formSelect);
 
 		// TODO: add in all form-fillable components:
-		JPanel formFill = new JPanel(/* TODO: add layout manager */);
-		// TODO: add to panel...
+		add(firstName);
+		add(middleInitial);
+		add(lastName);
+		add(displayName);
+		add(SSN);
+		add(phone);
+		add(email);
+		add(address);
+		add(spanel);
+		JPanel formFill = new JPanel(new BorderLayout());
+		formFill.add(firstName);
+		formFill.add(middleInitial);
+		formFill.add(lastName);
+		formFill.add(displayName);
+		formFill.add(SSN);
+		formFill.add(phone);
+		formFill.add(email);
+		formFill.add(address);
+		formFill.add(spanel);
 		this.add(formFill);
 
 		// Add in the signature panel:
