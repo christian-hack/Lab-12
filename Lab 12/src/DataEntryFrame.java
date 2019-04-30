@@ -184,12 +184,10 @@ public class DataEntryFrame extends JFrame
 			public void mouseDragged(MouseEvent e)
 			{
 				// TODO: add a point to the panel on drag and repaint.
-				/**
 				Point p = new Point(e.getPoint());
-				SignaturePanel sp = new SignaturePanel();
-				sp.addPoint(p);
-				sp.paint(getGraphics());
-				*/
+				spanel.addPoint(p);
+				spanel.repaint();
+				
 				
 			}
 		});
@@ -217,13 +215,23 @@ public class DataEntryFrame extends JFrame
 
 			// TODO: use the JTextFields and the signature panel to set the values
 			// of the selected FormData object.
-
+			FormData saveData = datalist.get(select);
+			boolean doesWork = saveData.setValues(firstName.getText(), middleInitial.getText().charAt(0), lastName.getText(),
+					displayName.getText(), SSN.getText(), phone.getText(), 
+					email.getText(), address.getText(), spanel.getSignature());
 			this.setVisuals(datalist.get(select));
 			DefaultComboBoxModel<String> newComboBoxModel = getComboBoxModel(datalist);
 			formSelect.setModel(newComboBoxModel);
 			formSelect.setSelectedIndex(select);
 
-			// TODO: display an error message if setting the values failed. Else, display a success message.w
+			// TODO: display an error message if setting the values failed. Else, display a success message.
+			if (doesWork) {
+				errorField.setText("Values set");
+			}
+			else {
+				errorField.setText("Values not set");
+			}
+			
 		});
 
 		JButton resetForm = new JButton("Reset");
@@ -234,7 +242,11 @@ public class DataEntryFrame extends JFrame
 		});
 
 		// TODO: add buttons to panel and add to frame
-
+		formHandling.add(createForm);
+		formHandling.add(saveForm);
+		formHandling.add(resetForm);
+		this.add(formHandling);
+		
 		// Add in the error message field:
 		this.errorField.setEditable(false);
 		// TODO: add error field to frame
