@@ -271,14 +271,17 @@ public class DataEntryFrame extends JFrame
 
 			// TODO: Choose a file (hint, use JFileChooser):
 			JFileChooser jf = new JFileChooser();
-			int returnVal = jf.showOpenDialog(this);
-			if(returnVal == JFileChooser.APPROVE_OPTION) 
-			{
-			       System.out.println("You chose to open this file: " + jf.getSelectedFile().getName());
+			jf.showOpenDialog(this);
+			File file0 = jf.getSelectedFile();
+			if(file0 == null) {
+				errorField.setText("No File selected");
+			}
+			else {
 			       try {
-					FileInputStream fs = new FileInputStream(jf.getSelectedFile().getName());
+					FileInputStream fs = new FileInputStream(file0.getAbsolutePath());
 					ObjectInputStream os = new ObjectInputStream(fs);
 					datalist = (ArrayList<FormData>) os.readObject();
+					os.close();
 					errorField.setText("File Imported");
 				} catch (FileNotFoundException e1) {
 					e1.printStackTrace();
@@ -311,13 +314,16 @@ public class DataEntryFrame extends JFrame
 
 			// TODO: Choose a file (hint, use JFileChooser):
 			JFileChooser jf2 = new JFileChooser();
-			int returnVal = jf2.showSaveDialog(this);
-			if (returnVal == JFileChooser.APPROVE_OPTION) {
+			jf2.showSaveDialog(this);
+			File file = jf2.getSelectedFile();
+			if (file == null) {
+				errorField.setText("No file selected.");
+			}
+			else {
 				try {
-					FileOutputStream fs2 = new FileOutputStream("datalist.txt");
+					FileOutputStream fs2 = new FileOutputStream(file.getAbsolutePath());
 					ObjectOutputStream os2 = new ObjectOutputStream(fs2);
-					os2.writeObject(this.datalist);
-					fs2.close();
+					os2.writeObject(datalist);
 					os2.close();
 					errorField.setText("File exported");
 				} catch (FileNotFoundException e1) {
