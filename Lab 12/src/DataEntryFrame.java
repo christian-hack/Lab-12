@@ -5,6 +5,7 @@ import java.awt.GridLayout;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -313,9 +314,9 @@ public class DataEntryFrame extends JFrame
 			int returnVal = jf2.showSaveDialog(this);
 			if (returnVal == JFileChooser.APPROVE_OPTION) {
 				try {
-					FileOutputStream fs2 = new FileOutputStream("datalist");
+					FileOutputStream fs2 = new FileOutputStream("datalist.txt");
 					ObjectOutputStream os2 = new ObjectOutputStream(fs2);
-					os2.writeObject(datalist);
+					os2.writeObject(this.datalist);
 					fs2.close();
 					os2.close();
 					errorField.setText("File exported");
