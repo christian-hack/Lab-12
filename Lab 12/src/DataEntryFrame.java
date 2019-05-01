@@ -278,6 +278,7 @@ public class DataEntryFrame extends JFrame
 					FileInputStream fs = new FileInputStream(jf.getSelectedFile().getName());
 					ObjectInputStream os = new ObjectInputStream(fs);
 					datalist = (ArrayList<FormData>) os.readObject();
+					errorField.setText("File Imported");
 				} catch (FileNotFoundException e1) {
 					e1.printStackTrace();
 					errorField.setText("File not found");
@@ -309,18 +310,23 @@ public class DataEntryFrame extends JFrame
 
 			// TODO: Choose a file (hint, use JFileChooser):
 			JFileChooser jf2 = new JFileChooser();
-			int returnVal = jf2.showOpenDialog(this);
+			int returnVal = jf2.showSaveDialog(this);
 			if (returnVal == JFileChooser.APPROVE_OPTION) {
 				try {
-					FileOutputStream fs2 = new FileOutputStream(this.displayName.toString());
+					FileOutputStream fs2 = new FileOutputStream("datalist");
 					ObjectOutputStream os2 = new ObjectOutputStream(fs2);
-					os2.writeObject(os2);
+					os2.writeObject(datalist);
+					fs2.close();
+					os2.close();
+					errorField.setText("File exported");
 				} catch (FileNotFoundException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
+					errorField.setText("File not Found");
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
+					errorField.setText("Nope nope nope");
 				}
 				
 			}
